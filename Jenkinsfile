@@ -35,19 +35,21 @@ pipeline {
             }
             
             steps {
-                sh 'ls -ls'
-                sh 'pwd'
-                sh 'whoami'
-                sh 'which git'
-                sh 'which terraform'
-                sh 'cd infra/'
-                sh 'ls -ls'
-                sh 'pwd'
-                sh 'terraform init -input=false'
-//                 sh 'terraform workspace select ${environment} || terraform workspace new ${environment}'
+                dir("infra"){
+                    sh 'ls -ls'
+                    sh 'pwd'
+                    sh 'whoami'
+                    sh 'which git'
+                    sh 'which terraform'
 
-                sh 'terraform plan'
-                sh 'terraform show -no-color tfplan > tfplan.txt'
+
+                    sh 'terraform init'
+    //                 sh 'terraform workspace select ${environment} || terraform workspace new ${environment}'
+
+                    sh 'terraform plan'
+                }
+                
+//                 sh 'terraform show -no-color tfplan > tfplan.txt'
             }
         }
 //         stage('Approval') {
