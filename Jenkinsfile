@@ -16,16 +16,16 @@ pipeline {
 
 
     stages {
-        stage('checkout') {
-            steps {
-                 script{
-                        dir("terraform")
-                        {
-                            git "https://github.com/DhruvRana1995/test-jenkins-public-repo.git"
-                        }
-                    }
-                }
-            }
+        // stage('checkout') {
+        //     steps {
+        //          script{
+        //                 dir("terraform")
+        //                 {
+        //                     git "https://github.com/DhruvRana1995/test-jenkins-public-repo.git"
+        //                 }
+        //             }
+        //         }
+        //     }
 
         stage('Plan') {
             when {
