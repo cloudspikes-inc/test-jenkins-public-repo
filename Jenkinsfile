@@ -37,57 +37,57 @@ pipeline {
             steps {
                 sh 'cd infra/'
                 sh 'terraform init -input=false'
-                sh 'terraform workspace select ${environment} || terraform workspace new ${environment}'
+//                 sh 'terraform workspace select ${environment} || terraform workspace new ${environment}'
 
-                sh "terraform plan -input=false -out tfplan "
+                sh 'terraform plan'
                 sh 'terraform show -no-color tfplan > tfplan.txt'
             }
         }
-        stage('Approval') {
-           when {
-               not {
-                   equals expected: true, actual: params.autoApprove
-               }
-               not {
-                    equals expected: true, actual: params.destroy
-                }
-           }
+//         stage('Approval') {
+//            when {
+//                not {
+//                    equals expected: true, actual: params.autoApprove
+//                }
+//                not {
+//                     equals expected: true, actual: params.destroy
+//                 }
+//            }
            
                 
             
 
-           steps {
-               script {
-                    def plan = readFile 'tfplan.txt'
-                    input message: "Do you want to apply the plan?",
-                    parameters: [text(name: 'Plan', description: 'Please review the plan', defaultValue: plan)]
-               }
-           }
-       }
+//            steps {
+//                script {
+//                     def plan = readFile 'tfplan.txt'
+//                     input message: "Do you want to apply the plan?",
+//                     parameters: [text(name: 'Plan', description: 'Please review the plan', defaultValue: plan)]
+//                }
+//            }
+//        }
 
-        stage('Apply') {
-            when {
-                not {
-                    equals expected: true, actual: params.destroy
-                }
-            }
+//         stage('Apply') {
+//             when {
+//                 not {
+//                     equals expected: true, actual: params.destroy
+//                 }
+//             }
             
-            steps {
-                sh 'cd infra/'
-                sh "terraform apply -input=false tfplan"
-            }
-        }
+//             steps {
+//                 sh 'cd infra/'
+//                 sh "terraform apply -input=false tfplan"
+//             }
+//         }
         
-        stage('Destroy') {
-            when {
-                equals expected: true, actual: params.destroy
-            }
+//         stage('Destroy') {
+//             when {
+//                 equals expected: true, actual: params.destroy
+//             }
         
-        steps {
-           sh 'cd infra/'
-           sh "terraform destroy --auto-approve"
-        }
-    }
+//         steps {
+//            sh 'cd infra/'
+//            sh "terraform destroy --auto-approve"
+//         }
+//     }
 
   }
 }
