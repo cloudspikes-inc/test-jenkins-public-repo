@@ -35,6 +35,7 @@ pipeline {
             }
             
             steps {
+                sh 'cd infra/'
                 sh 'terraform init -input=false'
                 sh 'terraform workspace select ${environment} || terraform workspace new ${environment}'
 
@@ -72,6 +73,7 @@ pipeline {
             }
             
             steps {
+                sh 'cd infra/'
                 sh "terraform apply -input=false tfplan"
             }
         }
@@ -82,6 +84,7 @@ pipeline {
             }
         
         steps {
+           sh 'cd infra/'
            sh "terraform destroy --auto-approve"
         }
     }
