@@ -46,10 +46,9 @@ pipeline {
                     sh 'terraform init'
     //                 sh 'terraform workspace select ${environment} || terraform workspace new ${environment}'
 
-                    sh 'terraform plan'
+                    sh 'terraform plan -var="app_image=nginx" -var="app_port=80"'
                 }
-                
-//                 sh 'terraform show -no-color tfplan > tfplan.txt'
+
             }
         }
 //         stage('Approval') {
