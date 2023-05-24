@@ -72,7 +72,7 @@ pipeline {
             
             steps {
                 dir("infra"){
-                    sh "terraform apply -input=false tfplan"
+                    sh 'terraform apply  -var="app_image=nginx" -var="app_port=80" --auto-approve'
                 }
             }
         }
@@ -85,7 +85,7 @@ pipeline {
         
             steps {   
                 dir("infra"){
-                    sh "terraform destroy --auto-approve"
+                    sh 'terraform destroy  -var="app_image=nginx" -var="app_port=80" --auto-approve'
                 }
             }
         }
