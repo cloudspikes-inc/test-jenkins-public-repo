@@ -41,6 +41,7 @@ pipeline {
                     sh 'whoami'
                     sh 'which git'
                     sh 'which terraform'
+                    sh 'terraform --version'
 
 
                     sh 'terraform init'
