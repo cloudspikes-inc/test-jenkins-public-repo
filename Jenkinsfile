@@ -36,9 +36,7 @@ pipeline {
 
                     sh 'terraform init'
 
-                    sh 'terraform plan -var="app_image=nginx" -var="app_port=80" -out tfplan.txt'
-                    // sh 'echo "" > tfplan.txt'
-                    // sh 'terraform show -no-color tfplan >> tfplan.txt'
+                    sh 'terraform plan -var="app_image=nginx" -var="app_port=80"'
                 }
 
             }
@@ -59,7 +57,7 @@ pipeline {
                script {
                     def plan = readFile 'tfplan.txt'
                     input message: "Do you want to apply the plan?",
-                    parameters: [text(name: 'Plan', description: 'Please review the plan', defaultValue: plan)]
+                    parameters: [text(name: 'Plan', description: 'Please review the plan', defaultValue: 'Check pipeline logs for terraform plan.')]
                }
            }
         }
