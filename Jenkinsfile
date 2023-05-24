@@ -37,8 +37,8 @@ pipeline {
                     sh 'terraform init'
 
                     sh 'terraform plan -var="app_image=nginx" -var="app_port=80" -out tfplan'
-
-                    sh 'terraform show -no-color tfplan > tfplan.txt'
+                    sh 'echo "" > tfplan.txt'
+                    sh 'terraform show -no-color tfplan >> tfplan.txt'
                 }
 
             }
