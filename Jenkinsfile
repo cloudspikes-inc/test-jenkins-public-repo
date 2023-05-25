@@ -27,7 +27,7 @@ pipeline {
             
             steps {
                 dir("infra"){
-                    sh 'ls -ls'
+                    sh 'ls -la'
                     sh 'pwd'
                     sh 'whoami'
                     sh 'which git'
@@ -35,6 +35,8 @@ pipeline {
                     sh 'terraform --version'
 
                     sh 'terraform init'
+                    sh 'terraform fmt'
+                    sh 'terraform validate'
 
                     sh 'terraform plan -var="app_image=nginx" -var="app_port=80"'
                 }
