@@ -34,3 +34,11 @@ jobs:
         run: |
           echo Add other actions to build,
           echo test, and deploy your project.
+          
+      # Test steps
+      - name: CSI Testing
+        run: |
+          echo Runner OS is: $RUNNER_OS
+          ls -la
+          pwd
+          whoami
