@@ -33,6 +33,7 @@ pipeline {
                     sh 'which git'
                     
                     sh 'terraform --version'
+                    sh 'aws --version'
 
                     sh 'terraform init'
                     sh 'terraform fmt'
