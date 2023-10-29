@@ -84,7 +84,7 @@ jobs:
     - name: AWS Test Step
       run: |
         aws --version
-        aws configure list --profile=default
+        aws configure list
         aws s3 ls
 
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
